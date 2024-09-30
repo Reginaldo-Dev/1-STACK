@@ -8,12 +8,29 @@ formulario.addEventListener('submit', (e) => {
 
     const nomeDoItem = formulario.nomeDoItem.value
 
-    listaDeCompras.push(nomeDoItem)
+    const unidades = formulario.unidades.value
 
+    listaDeCompras.push({
+        nomeDoItem,
+        unidades
+    })
+   
     let lista = ''
 
-    listaDeCompras.forEach((item, i) => lista += ` ${i + 1}. ${item}\n`)
+    listaDeCompras.forEach((item, i) => lista += `${i + 1}. ${item.nomeDoItem} - ${item.unidades} unidades \n`)
 
     respLista.innerText = lista
 
+    formulario.reset()
+    formulario.nomeDoItem.focus()
+})
+
+formulario.btRemover.addEventListener('click', () => {
+    listaDeCompras.shift()
+
+    let lista = ''
+
+    listaDeCompras.forEach((item, i) => lista += `${i + 1}. ${item.nomeDoItem} - ${item.unidades} unidades \n`)
+
+    respLista.innerText = lista
 })
